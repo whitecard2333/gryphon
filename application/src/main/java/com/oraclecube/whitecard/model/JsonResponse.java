@@ -1,7 +1,6 @@
 package com.oraclecube.whitecard.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.io.Serializable;
 
 /**
