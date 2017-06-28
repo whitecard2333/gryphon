@@ -1,7 +1,7 @@
 package com.oraclecube.whitecard.controller;
 
 import com.oraclecube.whitecard.helper.ControllerHelper;
-import com.oraclecube.whitecard.model.JsonResponse;
+import com.oraclecube.whitecard.model.response.JsonResponse;
 import io.swagger.annotations.*;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;

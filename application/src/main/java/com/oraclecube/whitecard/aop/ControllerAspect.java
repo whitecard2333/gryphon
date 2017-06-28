@@ -1,6 +1,6 @@
 package com.oraclecube.whitecard.aop;
 
-import com.oraclecube.whitecard.model.JsonResponse;
+import com.oraclecube.whitecard.model.response.JsonResponse;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -44,9 +44,9 @@ public class ControllerAspect extends AbstractAspect {
             response = proceedingJoinPoint.proceed(args);
             long end = System.currentTimeMillis();
             if (response instanceof JsonResponse) {
-                JsonResponse jsonResponse = (JsonResponse) response;
-                jsonResponse.setTimestatmp(start);
-                jsonResponse.setDuration(end - start);
+                JsonResponse res = (JsonResponse) response;
+                res.setTimestatmp(start);
+                res.setDuration(end - start);
             }
         } catch (Throwable throwable) {
             logger.error("aroundAdvice | {} | {} encounters some throwable", targetClassName, targetMethodName, throwable);

@@ -3,6 +3,17 @@ spring:
 #    include: logging,redis,rds,storm,mail,web,actuator
     active: local
 
+  datasource:
+      url: jdbc:mysql://localhost:3306/gryphon
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+  jap:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: create-drop
+
 server:
   port: 8771  #web port for rest
   address: 0.0.0.0  #web server address
