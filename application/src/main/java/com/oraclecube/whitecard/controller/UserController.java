@@ -1,5 +1,7 @@
 package com.oraclecube.whitecard.controller;
 
+import com.oraclecube.whitecard.annotation.DefaultApiResponse;
+import com.oraclecube.whitecard.model.User;
 import com.oraclecube.whitecard.model.request.CreateUserRequest;
 import com.oraclecube.whitecard.model.response.CreateUserResponse;
 import com.oraclecube.whitecard.model.response.JsonResponse;
@@ -23,18 +25,15 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET, consumes = {"*/*"})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = {"*/*"})
     @ResponseBody
-    @ApiOperation(value = "", notes = "test status", tags = {"Common API"})
+    @ApiOperation(value = "", notes = "add user", tags = {"Common API"})
     @ApiImplicitParams({})
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Success", response = JsonResponse.class),
-            @ApiResponse(code = 400, message = "Bad Request",response = JsonResponse.class),
-            @ApiResponse(code = 401, message = "Unauthorized",response = JsonResponse.class),
-            @ApiResponse(code = 403, message = "Forbidden",response = JsonResponse.class),
-            @ApiResponse(code = 404, message = "Not Found",response = JsonResponse.class),
-            @ApiResponse(code = 500, message = "Internal Error",response = JsonResponse.class)})
-    public CreateUserResponse sayHello(@RequestBody CreateUserRequest request){
-        return null;
+    @DefaultApiResponse
+    public CreateUserResponse addUser(@RequestBody CreateUserRequest request){
+        CreateUserResponse response = null;
+        User user = userRepository.save(request.getUser());
+        response.setUser(user);
+        return response;
     }
 }

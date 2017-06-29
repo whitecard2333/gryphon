@@ -24,5 +24,4 @@ public class Response implements Serializable {
     public void setRequestId(String requestId) {
         this.requestId = requestId;
     }
-
 }

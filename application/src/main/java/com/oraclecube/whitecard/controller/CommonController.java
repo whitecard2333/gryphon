@@ -25,13 +25,7 @@ public class CommonController extends AbstractController {
     @ResponseBody
     @ApiOperation(value = "test status api", notes = "test status", tags = {"Common API"})
     @ApiImplicitParams({})
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Success", response = JsonResponse.class),
-            @ApiResponse(code = 400, message = "Bad Request",response = JsonResponse.class),
-            @ApiResponse(code = 401, message = "Unauthorized",response = JsonResponse.class),
-            @ApiResponse(code = 403, message = "Forbidden",response = JsonResponse.class),
-            @ApiResponse(code = 404, message = "Not Found",response = JsonResponse.class),
-            @ApiResponse(code = 500, message = "Internal Error",response = JsonResponse.class)})
+
     public JsonResponse testToken(HttpServletRequest request) {
         String action = "test status";
         return controllerHelper.getSuccessResponse(action, "Gryphon status success");

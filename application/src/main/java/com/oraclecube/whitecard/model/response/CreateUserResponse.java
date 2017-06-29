@@ -1,21 +1,21 @@
 package com.oraclecube.whitecard.model.response;
 
 import com.alibaba.fastjson.JSON;
+import com.oraclecube.whitecard.model.User;
 
 /**
  * Created by xiongbanglong on 2017/5/10.
  */
 public class CreateUserResponse extends Response {
-    private Boolean status;
+    private User user;
 
-    public Boolean getStatus() {
-        return status;
+    public User getUser() {
+        return user;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setUser(User user) {
+        this.user = user;
     }
-
 
     @Override
     public String toString() {
