@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import java.util.UUID;
 
 /**
  * Created by xiongbanglong on 2017/6/28.
@@ -27,13 +28,25 @@ public class UserController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = {"*/*"})
     @ResponseBody
-    @ApiOperation(value = "", notes = "add user", tags = {"Common API"})
+    @ApiOperation(value = "", notes = "create one new user", tags = {"Common API"})
     @ApiImplicitParams({})
-    @DefaultApiResponse
     public CreateUserResponse addUser(@RequestBody CreateUserRequest request){
-        CreateUserResponse response = null;
-        User user = userRepository.save(request.getUser());
-        response.setUser(user);
+        CreateUserResponse response = new CreateUserResponse();
+        response.setRequestId(UUID.randomUUID().toString());
+        if(request != null){
+            logger.info(request.toString());
+            User user = userRepository.save(request.getUser());
+            if(user != null){
+                response.setId(user.getId());
+                response.setStatus(true);
+            }else {
+                response.setStatus(false);
+            }
+        }
+
+        if(response != null){
+            logger.info(response.toString());
+        }
         return response;
     }
 }
