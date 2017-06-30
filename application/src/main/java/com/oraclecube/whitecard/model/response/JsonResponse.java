@@ -1,5 +1,6 @@
 package com.oraclecube.whitecard.model.response;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
 public class JsonResponse implements Serializable {
     private static final long serialVersionUID = 8407357554057531490L;
     private int code;
+    private String requestId;
     private String status;
     private String action;
     private String path;
@@ -26,6 +28,14 @@ public class JsonResponse implements Serializable {
 
     public void setCode(int code) {
         this.code = code;
+    }
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 
     public String getStatus() {
@@ -98,5 +108,10 @@ public class JsonResponse implements Serializable {
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString(){
+        return "JsonResponse:" + JSON.toJSONString(this);
     }
 }

@@ -20,6 +20,12 @@ public class User {
     @Column(name = "username")
     private String username;
 
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "confirmpassword")
+    private String confirmPassword;
+
     @Column(name = "phone")
     private String phone;
 
@@ -43,6 +49,22 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getPhone() {

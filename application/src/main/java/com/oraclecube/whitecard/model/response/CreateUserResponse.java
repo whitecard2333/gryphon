@@ -8,7 +8,7 @@ import com.oraclecube.whitecard.model.User;
  */
 public class CreateUserResponse extends Response {
     private Integer id;
-    private Boolean status;
+    private Boolean success;
 
     public Integer getId() {
         return id;
@@ -18,16 +18,16 @@ public class CreateUserResponse extends Response {
         this.id = id;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Boolean getSuccess() {
+        return success;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
 
     @Override
     public String toString() {
-        return "CreateUserResponse:" + JSON.toJSONString(this);
+        return "CreateUserResponse" + JSON.toJSONString(this);
     }
 }

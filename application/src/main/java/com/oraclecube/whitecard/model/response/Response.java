@@ -7,15 +7,7 @@ import java.io.Serializable;
  */
 public class Response implements Serializable {
     private static final long serialVersionUID = 8447357854023531470L;
-    protected String requestId;
-
-    public Response(){
-
-    }
-
-    public Response(String requestId){
-        this.requestId = requestId;
-    }
+    private String requestId;
 
     public String getRequestId() {
         return requestId;
