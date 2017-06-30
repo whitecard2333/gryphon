@@ -1,7 +1,7 @@
 package com.oraclecube.whitecard.controller;
 
 import com.oraclecube.whitecard.helper.ControllerHelper;
-import com.oraclecube.whitecard.model.JsonResponse;
+import com.oraclecube.whitecard.model.response.JsonResponse;
 import io.swagger.annotations.*;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -21,18 +21,11 @@ public class CommonController extends AbstractController {
     @Autowired
     private ControllerHelper controllerHelper;
 
-    @RequestMapping(value = "status", method = RequestMethod.GET, consumes = {"*/*"})
+    @RequestMapping(value = "/status", method = RequestMethod.GET, consumes = {"*/*"})
     @ResponseBody
     @ApiOperation(value = "test status api", notes = "test status", tags = {"Common API"})
-    @ApiImplicitParams({
-    })
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Success", response = JsonResponse.class),
-            @ApiResponse(code = 400, message = "Bad Request"),
-            @ApiResponse(code = 401, message = "Unauthorized"),
-            @ApiResponse(code = 403, message = "Forbidden"),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Internal Error")})
+    @ApiImplicitParams({})
+
     public JsonResponse testToken(HttpServletRequest request) {
         String action = "test status";
         return controllerHelper.getSuccessResponse(action, "Gryphon status success");
