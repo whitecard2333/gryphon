@@ -1,6 +1,6 @@
-package com.oraclecube.whitecard.helper;
+package com.oraclecube.whitecard.application.helper;
 
-import com.oraclecube.whitecard.model.JsonResponse;
+import com.oraclecube.whitecard.application.model.JsonResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,8 @@ import java.util.Collection;
 public class ControllerHelper {
     private static final Logger logger = LoggerFactory.getLogger(ControllerHelper.class);
 
-    public JsonResponse getSuccessResponse(String action, Object... datas) {
+    public JsonResponse
+    getSuccessResponse(String action, Object... datas) {
         JsonResponse response = new JsonResponse();
         response.setAction(action);
         response.setCode(HttpStatus.OK.value());

@@ -63,6 +63,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.oraclecube.whitecard</groupId>
+            <artifactId>service</artifactId>
+            <version>${unified.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

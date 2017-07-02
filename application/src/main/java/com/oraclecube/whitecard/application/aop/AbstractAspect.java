@@ -1,4 +1,4 @@
-package com.oraclecube.whitecard.aop;
+package com.oraclecube.whitecard.application.aop;
 
 /**
  * Abstract aspect for AOP

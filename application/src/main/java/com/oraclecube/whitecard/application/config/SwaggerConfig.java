@@ -1,4 +1,4 @@
-package com.oraclecube.whitecard.config;
+package com.oraclecube.whitecard.application.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
