@@ -1,4 +1,4 @@
-package com.oraclecube.whitecard.model;
+package com.oraclecube.whitecard.application.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

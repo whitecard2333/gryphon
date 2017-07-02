@@ -1,0 +1,99 @@
+gryphon:
+  common:
+    adminUser: admin
+    adminPassword: admin
+    domain:
+      orderCenter: default
+      paymentCenter: default
+    callbackService:
+      urlLimit: 2
+    http:
+      retryCount: 1
+
+  config:
+    enableJpa:
+      map:
+        default: true
+        application: true
+  core:
+    datasource:
+      url: jdbc:mysql://47.93.126.28:3506/razzil_order_center?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    jpa:
+      show-sql: true
+      properties:
+        #第一次加载hibernate时根据model类会自动建立起表的结构（前提是先建立好数据库），
+        #以后加载hibernate时根据model类自动更新表结构，即使表结构改变了但表中的行仍然存在不会删除以前的行。
+        #要注意的是当部署到服务器后，表结构是不会被马上建立起来的，是要等应用第一次运行起来后才会
+        hibernate.hbm2ddl.auto: 'update'
+        hibernate.naming-strategy: 'org.hibernate.cfg.ImprovedNamingStrategy'
+        hibernate.dialect: 'org.hibernate.dialect.MySQL5Dialect' #The SQL dialect makes Hibernate generate better SQL for the chosen database
+        hibernate.query.substitutions: 'true 1, false 0'
+        hibernate.default_batch_fetch_size: '16'
+        hibernate.max_fetch_depth: '2'
+        hibernate.generate_statistics: 'true'
+        hibernate.bytecode.use_reflection_optimizer: 'true'
+        hibernate.cache.use_second_level_cache: 'false'
+        hibernate.cache.use_query_cache: 'false'
+
+  service:
+    httpClient:
+      usergrid:
+        baseUrl: 'http://a1.easemob.com'
+        internalBaseUrl: 'http://a2.easemob.com'
+        internalUsername: superuser
+        internalPassword: easemob&&rest&&superToken
+      maxTotal: 1000
+      maxPerRoute: 1000
+      connectTimeout: 5000
+      readTimeout: 5000
+    bigdata:
+      cassandra:
+        host: 10.251.211.156
+        port: 9042
+        keyspace: sai_app
+    notification:
+      kafka:
+        brokerList: 'ebs-ali-beijing-kafka32:9092,ebs-ali-beijing-kafka31:9092,ebs-ali-beijing-kafka30:9092,ebs-ali-beijing-kafka29:9092,ebs-ali-beijing-kafka28:9092,ebs-ali-beijing-kafka27:9092,ebs-ali-beijing-kafka26:9092,ebs-ali-beijing-kafka25:9092,ebs-ali-beijing-kafka24:9092,ebs-ali-beijing-kafka23:9092'
+        topic: 'sendSmsAndEmail'
+
+  application:
+    manageOrg: 1153170610115703
+
+  orderCenter:
+#    baseDomain: 'http://47.93.126.28:8981/ordercenter/rest/v1'
+    baseDomain: 'http://47.93.126.28:8991/ordercenter/rest/v1'
+    callbackUrl: ${razzil.orderCenter.baseDomain}/userapi/orders/pay/notify
+    timeoutMillis: 3600000
+    notification:
+      mailBeforeServiceInstanceExpired:
+        beforeDaysForServiceInstanceExpired: 7
+        defaultFrom: razzil_admin@easemob.com
+        defaultSubjectTemplate: 'Warning - $serviceName will be expired after $number days'
+        defaultHtmlTextTemplate: '<html><body>Dear $creator,</br> Your $serviceName from $serviceVendor will be expired after $number days. </br>Please renew it!</body></html>'
+
+  paymentCenter:
+#    baseDomain: 'http://47.93.126.28:8982/paymentcenter/rest/v1'
+    baseDomain: 'http://localhost:8882/paymentcenter/rest/v1'
+    consoleDomain: http://localhost:8086
+    successPaymentPage: ${razzil.paymentCenter.consoleDomain}/#/payment/Orders
+    failurePaymentPage: ${razzil.paymentCenter.consoleDomain}/#/payment/Orders?status=failed
+    checkPaymentOrderStatusUrl: ${razzil.paymentCenter.baseDomain}/userapi/paymentorders/status/orderid
+    paymentRecordsQueryUrl: ${razzil.paymentCenter.baseDomain}/userapi/paymentrecords
+    paymentProxy:
+      alipay:
+        defaultBody: '北京易掌云峰科技有限公司在线充值'
+        defaultSubject: '充值'
+        defaultInputCharset: 'UTF-8'
+        returnUrl: ${razzil.paymentCenter.baseDomain}/userapi/paymentorders/alipay/sync/notify
+        notifyUrl: ${razzil.paymentCenter.baseDomain}/userapi/paymentorders/alipay/async/notify
+        showUrl: 'http://www.console.com'
+        mapiVerifyUrl: 'https://mapi.alipay.com/gateway.do?service=notify_verify&'
+        mapiGateway: 'https://mapi.alipay.com/gateway.do?'
+#        paymentRequestUrl: ${razzil.paymentCenter.baseDomain}/userapi/paymentorders
+        paymentRequestUrl: http://localhost:8882/paymentcenter/rest/v1/userapi/paymentorders
+        refundNotifyUrl: ${razzil.paymentCenter.baseDomain}/userapi/paymentorders/alipay/refund/notify
+
+

@@ -1,4 +1,4 @@
-package com.oraclecube.whitecard.controller;
+package com.oraclecube.whitecard.application.controller;
 
 /**
  * Abstract Controller as parent of other Controllers

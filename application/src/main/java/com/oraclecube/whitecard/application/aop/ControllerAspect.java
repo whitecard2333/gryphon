@@ -1,6 +1,6 @@
-package com.oraclecube.whitecard.aop;
+package com.oraclecube.whitecard.application.aop;
 
-import com.oraclecube.whitecard.model.JsonResponse;
+import com.oraclecube.whitecard.application.model.JsonResponse;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
